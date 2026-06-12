@@ -3,52 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ayyıldız Yardım Derneği</title>
+    <title>Ayyıldız Yardım Derneği | Kurumsal, Yönetim Kurulu ve Projeler</title>
     <style>
-        /* Genel Stil Ayarları */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
+        html {
+            scroll-behavior: smooth;
+        }
         body {
-            background-color: #f9f9f9;
+            background-color: #f7f9fa;
             color: #333;
-            line-height: 1.6;
+            line-height: 1.7;
         }
         a {
             text-decoration: none;
             color: inherit;
+            transition: all 0.3s ease;
         }
         li {
             list-style: none;
         }
 
-        /* Üst Bilgi Çubuğu (Top Bar) */
         .top-bar {
-            background-color: #1a1a1a;
-            color: #fff;
-            padding: 10px 20px;
+            background-color: #1c1e21;
+            color: #f5f5f5;
+            padding: 12px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-size: 14px;
+            border-bottom: 2px solid #d32f2f;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         .top-bar .contact-info span {
-            margin-right: 20px;
+            margin-right: 25px;
+        }
+        .top-bar .top-right-links {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .top-bar .top-right-links a:hover {
+            color: #d32f2f;
         }
         .top-bar .catalog-btn {
             background-color: #d32f2f;
-            padding: 5px 15px;
+            color: #fff;
+            padding: 6px 18px;
             border-radius: 4px;
             font-weight: bold;
         }
+        .top-bar .catalog-btn:hover {
+            background-color: #b71c1c;
+        }
+        .lang-switch {
+            display: flex;
+            gap: 8px;
+            margin-left: 10px;
+        }
+        .lang-switch a {
+            color: #ccc;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+        .lang-switch a.active {
+            color: #fff;
+            background-color: #d32f2f;
+        }
+        .lang-switch a:hover {
+            color: #fff;
+        }
 
-        /* Navigasyon Menüsü */
         header {
             background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -58,56 +94,97 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 20px;
-            max-width: 1200px;
+            max-width: 1240px;
             margin: 0 auto;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         .logo h1 {
             color: #d32f2f;
-            font-size: 24px;
+            font-size: 22px;
             font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+        .logo span {
+            color: #1c1e21;
+            font-size: 12px;
+            display: block;
+            font-weight: 400;
+            margin-top: -4px;
         }
         .nav-links {
             display: flex;
+            flex-wrap: wrap;
         }
         .nav-item {
             position: relative;
-            padding: 10px 15px;
+            padding: 15px 12px;
             font-weight: 600;
+            font-size: 13px;
             cursor: pointer;
+            color: #444;
+            text-transform: uppercase;
         }
+        .nav-item>a {
+            display: block;
+        }
+        .nav-item:hover>a,
         .nav-item:hover {
             color: #d32f2f;
         }
-        /* Açılır Menü (Dropdown) */
+
         .dropdown {
             display: none;
             position: absolute;
             top: 100%;
             left: 0;
             background-color: #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
             border-top: 3px solid #d32f2f;
-            min-width: 220px;
+            min-width: 230px;
             border-radius: 0 0 4px 4px;
+            padding: 5px 0;
         }
         .dropdown li {
-            padding: 10px 15px;
-            border-bottom: 1px solid #eee;
-            font-size: 14px;
-            color: #333;
+            position: relative;
+            padding: 10px 20px;
+            border-bottom: 1px solid #f1f1f1;
+            font-size: 13px;
+            color: #555;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        .dropdown li:last-child {
+            border-bottom: none;
         }
         .dropdown li:hover {
-            background-color: #f5f5f5;
+            background-color: #fff5f5;
             color: #d32f2f;
         }
-        .nav-item:hover .dropdown {
+        .nav-item:hover>.dropdown {
             display: block;
         }
 
-        /* Hero (Giriş) Alanı */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3') no-repeat center center/cover;
-            height: 450px;
+        .sub-dropdown {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 100%;
+            background-color: #fff;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            border-left: 3px solid #d32f2f;
+            min-width: 220px;
+            padding: 5px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        .dropdown li:hover>.sub-dropdown {
+            display: block;
+        }
+
+        .hero-banner {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.6)),
+                url('https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?ixlib=rb-4.0.3') no-repeat center center/cover;
+            height: 220px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -116,128 +193,516 @@
             text-align: center;
             padding: 0 20px;
         }
-        .hero h2 {
-            font-size: 36px;
-            margin-bottom: 15px;
+        .hero-banner h2 {
+            font-size: 30px;
+            margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
-        .hero p {
-            font-size: 18px;
-            max-width: 600px;
+        .hero-banner .breadcrumbs {
+            font-size: 13px;
+            background: rgba(211, 47, 47, 0.85);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .main-container {
+            max-width: 1240px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 30px;
+        }
+
+        .content-area {
+            flex: 3;
+            min-width: 0;
+        }
+
+        .about-highlight-box {
+            background: #fff;
+            border-left: 6px solid #d32f2f;
+            padding: 30px;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            margin-bottom: 30px;
+        }
+        .about-highlight-box h3 {
+            color: #d32f2f;
+            font-size: 19px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        .about-highlight-box p {
+            font-size: 15.5px;
+            color: #2c3e50;
+            font-style: italic;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .content-card {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            margin-bottom: 30px;
+        }
+        .content-card h2 {
+            color: #1c1e21;
+            font-size: 24px;
             margin-bottom: 25px;
+            border-bottom: 2px solid #f1f1f1;
+            padding-bottom: 10px;
         }
-        .cta-btn {
-            background-color: #d32f2f;
-            color: #fff;
-            padding: 12px 30px;
-            font-weight: bold;
-            border-radius: 5px;
-            font-size: 16px;
-            transition: 0.3s;
+        .content-card h3 {
+            color: #d32f2f;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 18px;
         }
-        .cta-btn:hover {
-            background-color: #b71c1c;
-        }
-
-        /* İçerik Alanları */
-        .section {
-            padding: 60px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .section-title {
-            text-align: center;
-            font-size: 28px;
-            color: #222;
-            margin-bottom: 40px;
-            position: relative;
-        }
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background-color: #d32f2f;
-            margin: 10px auto 0;
+        .content-card p {
+            margin-bottom: 18px;
+            color: #4a4a4a;
+            text-align: justify;
+            font-size: 15px;
         }
 
-        /* Projeler Kart Yapısı */
-        .grid {
+        .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .video-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        .video-card:hover {
+            border-color: #d32f2f;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+        .video-card .video-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+            color: #d32f2f;
+        }
+        .video-card h4 {
+            color: #1c1e21;
+            font-size: 13px;
+            margin-bottom: 8px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+        .video-card .video-meta {
+            font-size: 12px;
+            color: #888;
+        }
+        .video-card .tag {
+            display: inline-block;
+            background: #d32f2f;
+            color: #fff;
+            font-size: 10px;
+            padding: 3px 8px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .service-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .service-item {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffebeb 100%);
+            border-left: 4px solid #d32f2f;
+            padding: 18px;
+            border-radius: 4px;
+            font-weight: 600;
+            color: #b71c1c;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .service-item:hover {
+            background: linear-gradient(135deg, #ffebeb 0%, #ffe0e0 100%);
+            transform: translateX(3px);
+        }
+        .service-item .service-icon {
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .campaign-banner {
+            background: linear-gradient(135deg, #fff5f5 0%, #ffebeb 100%);
+            border: 2px dashed #d32f2f;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
             gap: 20px;
         }
-        .card {
+        .campaign-icon {
+            font-size: 45px;
+        }
+        .campaign-text h3 {
+            color: #d32f2f;
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+        .campaign-text p {
+            font-size: 14.5px;
+            color: #444;
+            margin-bottom: 0;
+        }
+
+        .food-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        .food-tag {
+            background: #f1f3f5;
+            color: #495057;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 13.5px;
+            font-weight: 600;
+            border: 1px solid #dee2e6;
+        }
+
+        .alert-stat-box {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border-left: 5px solid #d32f2f;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .alert-stat-box .stat-highlight {
+            font-size: 28px;
+            font-weight: 800;
+            color: #d32f2f;
+            white-space: nowrap;
+            border-right: 2px solid #555;
+            padding-right: 15px;
+        }
+        .alert-stat-box .stat-desc {
+            font-size: 14px;
+            line-height: 1.4;
+            color: #ddd;
+        }
+
+        .education-focus-box {
+            background: linear-gradient(135deg, #fdfbf7 0%, #f5efe6 100%);
+            border-left: 6px solid #b71c1c;
+            padding: 25px;
+            border-radius: 6px;
+            margin: 20px 0;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.02);
+        }
+        .education-focus-box h4 {
+            color: #b71c1c;
+            font-size: 16.5px;
+            margin-bottom: 8px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .islamic-worship-box {
+            background: linear-gradient(135deg, #f4f6f8 0%, #eef1f5 100%);
+            border-left: 6px solid #1e88e5;
+            padding: 25px;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        .islamic-worship-box h4 {
+            color: #1e88e5;
+            font-size: 16.5px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        .worship-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        .worship-tag {
+            background: #fff;
+            color: #1e88e5;
+            padding: 3px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 700;
+            border: 1px solid #bfdbfe;
+        }
+
+        .management-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .member-card {
+            background: #f8f9fa;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .member-card:hover {
+            border-color: #d32f2f;
+            transform: translateY(-3px);
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+        .member-avatar {
+            width: 70px;
+            height: 70px;
+            background-color: #e9ecef;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 15px;
+            font-size: 24px;
+            color: #ae1f1f;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .member-card h3 {
+            font-size: 14px;
+            color: #1c1e21;
+            margin-bottom: 5px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        .member-card p {
+            font-size: 12px;
+            color: #d32f2f;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0;
+            letter-spacing: 0.3px;
+        }
+
+        .donation-block {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px dashed #eee;
+        }
+        .donation-block:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        .donation-block h3 {
+            color: #d32f2f;
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+        .donation-list {
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+        .donation-list li {
+            list-style-type: square;
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .bank-info-box {
+            background: #f0f4f8;
+            border: 2px solid #d32f2f;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .bank-info-box .bank-name {
+            font-weight: 700;
+            font-size: 18px;
+            color: #1c1e21;
+        }
+        .bank-info-box .iban {
+            font-family: 'Courier New', monospace;
+            font-size: 15px;
+            font-weight: 700;
+            color: #d32f2f;
+            background: #fff;
+            padding: 8px 15px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 8px;
+            letter-spacing: 1px;
+        }
+
+        .sidebar {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            min-width: 260px;
+        }
+        .widget {
             background: #fff;
             padding: 25px;
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            text-align: center;
-            border-top: 4px solid #d32f2f;
-            transition: 0.3s;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            border-left: 4px solid #d32f2f;
         }
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-        .card h3 {
-            margin-bottom: 12px;
-            color: #222;
-        }
-        .card p {
+        .widget h3 {
             font-size: 14px;
+            color: #1c1e21;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .widget-menu li {
+            border-bottom: 1px solid #f5f5f5;
+            padding: 9px 0;
+            font-size: 13.5px;
             color: #666;
         }
-
-        /* Bağış Bilgileri Tablosu */
-        .bank-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: #fff;
-            margin-top: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .bank-table th, .bank-table td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-        .bank-table th {
-            background-color: #d32f2f;
-            color: white;
-        }
-
-        /* Alt Bilgi (Footer) */
-        footer {
-            background-color: #1a1a1a;
-            color: #fff;
-            padding: 40px 20px;
-            text-align: center;
-            font-size: 14px;
-        }
-        footer p {
-            margin-bottom: 10px;
-        }
-        .footer-logo {
-            font-size: 20px;
-            font-weight: bold;
+        .widget-menu li:hover {
             color: #d32f2f;
-            margin-bottom: 15px;
+            padding-left: 5px;
         }
 
-        /* Mobil Uyum */
-        @media (max-width: 768px) {
-            .navbar {
+        .catalog-widget {
+            background: #d32f2f;
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .catalog-widget p {
+            font-size: 13px;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+        .catalog-widget .btn-white {
+            display: inline-block;
+            background: #fff;
+            color: #d32f2f;
+            padding: 10px 20px;
+            font-weight: bold;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        footer {
+            background-color: #1c1e21;
+            color: #a0a5aa;
+            padding: 50px 20px 20px;
+            margin-top: 60px;
+            font-size: 14px;
+            border-top: 4px solid #d32f2f;
+        }
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #2d3135;
+        }
+        .footer-col h4 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 15px;
+            position: relative;
+        }
+        .footer-col h4::after {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 2px;
+            background: #d32f2f;
+            margin-top: 8px;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 992px) {
+            .main-container {
                 flex-direction: column;
             }
             .nav-links {
-                flex-wrap: wrap;
                 justify-content: center;
-                margin-top: 15px;
+            }
+            .sidebar {
+                min-width: auto;
+            }
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
             }
             .top-bar {
                 flex-direction: column;
+                gap: 8px;
                 text-align: center;
-                gap: 10px;
+            }
+            .campaign-banner,
+            .alert-stat-box,
+            .islamic-worship-box {
+                flex-direction: column;
+                text-align: center;
+            }
+            .alert-stat-box .stat-highlight {
+                border-right: none;
+                border-bottom: 2px solid #555;
+                padding-right: 0;
+                padding-bottom: 10px;
+                width: 100%;
+            }
+            .worship-tags {
+                justify-content: center;
+            }
+            .dropdown {
+                position: static;
+                box-shadow: none;
+                width: 100%;
+            }
+            .sub-dropdown {
+                position: static;
+                box-shadow: none;
+                width: 100%;
+                padding-left: 15px;
+            }
+            .content-card {
+                padding: 25px;
+            }
+            .video-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -249,55 +714,92 @@
             <span>📞 0533 665 43 31</span>
             <span>✉️ bilgi@ayyildizyardimdernegi.org.tr</span>
         </div>
-        <a href="#" class="catalog-btn">Online Katalog</a>
+        <div class="top-right-links">
+            <div class="lang-switch">
+                <a href="#" class="active">tr</a>
+                <a href="#">en</a>
+                <a href="#">de</a>
+            </div>
+            <a href="#">Basında Biz</a>
+            <a href="#" class="catalog-btn">Online Katalog</a>
+        </div>
     </div>
 
     <header>
         <div class="navbar">
             <div class="logo">
                 <h1>AYYILDIZ DERNEĞİ</h1>
+                <span>İnsani Yardım Derneği</span>
             </div>
             <nav>
                 <ul class="nav-links">
                     <li class="nav-item"><a href="#">Anasayfa</a></li>
-                    <li class="nav-item">Kurumsal ▾
+                    <li class="nav-item">KURUMSAL ▾
                         <ul class="dropdown">
-                            <li>Hakkımızda</li>
-                            <li>Yönetim Kurulu</li>
-                            <li>Tüzük</li>
-                            <li>Çalışma İlkelerimiz</li>
-                            <li>Temsilcilikler</li>
+                            <li><a href="#hakkimizda">HAKKIMIZDA</a></li>
+                            <li><a href="#yonetim-kurulu">YÖNETİM KURULU</a></li>
+                            <li><a href="#">TÜZÜK</a></li>
+                            <li><a href="#">ÇALIŞMA İLKELERİMİZ</a></li>
+                            <li><a href="#">TEMSİLCİLİKLER</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">Projeler ▾
+                    <li class="nav-item">PROJELER ▾
                         <ul class="dropdown">
-                            <li>Sağlık & Sünnet Yardımları</li>
-                            <li>Gıda Yardımları (Koli, Un)</li>
-                            <li>Eğitim Projeleri</li>
-                            <li>Sadaka, Zekat & Fitre</li>
-                            <li>Su Kuyuları</li>
-                            <li>Kurban Yardımı</li>
+                            <li>SAĞLIK YARDIMLARI ▸
+                                <ul class="sub-dropdown">
+                                    <li><a href="#sunnet-yardimlari">SÜNNET YARDIMLARI</a></li>
+                                </ul>
+                            </li>
+                            <li>GIDA YARDIMLARI ▸
+                                <ul class="sub-dropdown">
+                                    <li><a href="#gida-yardimlari">GIDA KOLİSİ</a></li>
+                                    <li><a href="#gida-yardimlari">UN YARDIMLARI</a></li>
+                                </ul>
+                            </li>
+                            <li>EĞİTİM PROJELERİ ▸
+                                <ul class="sub-dropdown">
+                                    <li><a href="#egitim-yardimlari">EĞİTİM YARDIMLARI</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#mali-ibadetler">SADAKA, ZEKAT, FİTRE YARDIMLARI</a></li>
+                            <li><a href="#su-kuyulari">SU KUYULARI</a></li>
+                            <li><a href="#kurban-yardimi">KURBAN YARDIMI</a></li>
+                            <li><a href="#giyecek-yardimlari">GİYECEK YARDIMLARI</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">Bağış ▾
+                    <li class="nav-item">BAĞIŞ ▾
                         <ul class="dropdown">
-                            <li>Online Bağış</li>
-                            <li>Ayni Bağış</li>
-                            <li>Banka Hesapları</li>
-                            <li>SMS Bağış</li>
+                            <li><a href="#">ONLINE BAĞIŞ</a></li>
+                            <li><a href="#bagis-rehberi">BAĞIŞ HAKKINDA</a></li>
+                            <li><a href="#ayni-bagis">AYNİ BAĞIŞ</a></li>
+                            <li><a href="#banka-hesaplari">BANKA HESAPLARI</a></li>
+                            <li><a href="#">MAKBUZ</a></li>
+                            <li><a href="#sms-bagis">SMS BAĞIŞ</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">Ülkeler ▾
+                    <li class="nav-item">FAALİYETLER ▾
                         <ul class="dropdown">
-                            <li>Arakan / Suriye</li>
-                            <li>Irak / Kırım</li>
-                            <li>Kosova / Makedonya / Bulgaristan</li>
+                            <li><a href="#">TAMAMLANAN YARDIMLAR</a></li>
+                            <li><a href="#">DERNEK FAALİYETLERİ</a></li>
+                            <li><a href="#">DUYURULAR</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">Multimedya ▾
+                    <li class="nav-item">ÜLKELER ▾
                         <ul class="dropdown">
-                            <li>Tanıtım Videosu</li>
-                            <li>Foto & Video Galeri</li>
+                            <li><a href="#arakan-detay">ARAKAN</a></li>
+                            <li><a href="#">BULGARİSTAN</a></li>
+                            <li><a href="#">IRAK</a></li>
+                            <li><a href="#">KIRIM</a></li>
+                            <li><a href="#">KOSOVA</a></li>
+                            <li><a href="#makedonya-detay">MAKEDONYA</a></li>
+                            <li><a href="#suriyedetay">SURİYE</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">MULTİMEDYA ▾
+                        <ul class="dropdown">
+                            <li><a href="#">TANITIM VİDEOSU</a></li>
+                            <li><a href="#">VİDEO GALERİ</a></li>
+                            <li><a href="#">FOTO GALERİ</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -305,66 +807,311 @@
         </div>
     </header>
 
-    <section class="hero">
-        <h2>Yeryüzünde İyilik Hilali</h2>
-        <p>Ayyıldız Yardım Derneği olarak, ihtiyaç sahibi coğrafyalarda gıda, eğitim, sağlık ve su kuyusu projelerimizle umut olmaya devam ediyoruz.</p>
-        <a href="#bagis" class="cta-btn">Şimdi Bağış Yap</a>
+    <section class="hero-banner">
+        <h2>FAALİYET VE PROJELERİMİZ</h2>
+        <div class="breadcrumbs">Ayyıldız İnsani Yardım Derneği Faaliyetleri</div>
     </section>
 
-    <section class="section">
-        <h2 class="section-title">Öne Çıkan Projelerimiz</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>💧 Su Kuyuları</h3>
-                <p>Temiz suya ulaşamayan Afrika ve Asya bölgelerinde kalıcı su kuyuları açarak hayata can oluyoruz.</p>
-            </div>
-            <div class="card">
-                <h3>📦 Gıda Yardımları</h3>
-                <p>Ramazan ayı başta olmak üzere yıl genelinde gıda kolisi ve un yardımları ile sofraları bereketlendiriyoruz.</p>
-            </div>
-            <div class="card">
-                <h3>🎓 Eğitim Yardımları</h3>
-                <p>Yoksul coğrafyalardaki öğrencilere kırtasiye, burs ve medrese destekleri sağlıyoruz.</p>
-            </div>
-            <div class="card">
-                <h3>🐑 Kurban Yardımı</h3>
-                <p>Emanet ettiğiniz kurbanları İslami usullere uygun olarak kesip, gerçek ihtiyaç sahiplerine ulaştırıyoruz.</p>
-            </div>
-        </div>
-    </section>
+    <div class="main-container">
+        <main class="content-area">
 
-    <section class="section" id="bagis" style="background-color: #f0f2f5; max-width: 100%;">
-        <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
-            <h2 class="section-title">Banka Hesap Bilgilerimiz</h2>
-            <p style="text-align: center; margin-bottom: 20px;">Yurtiçi ve yurtdışından yapacağınız transferlerde açıklama kısmına bağış türünü (Örn: Su Kuyusu, Zekat) yazmayı unutmayınız.</p>
-            <table class="bank-table">
-                <thead>
-                    <tr>
-                        <th>Banka Adı</th>
-                        <th>Hesap Sahibi</th>
-                        <th>IBAN Numarası</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Ziraat Bankası</td>
-                        <td>Ayyıldız İnsani Yardım Derneği</td>
-                        <td>TR00 0000 0000 0000 0000 0000 00 (Örnektir)</td>
-                    </tr>
-                    <tr>
-                        <td>Vakıfbank</td>
-                        <td>Ayyıldız İnsani Yardım Derneği</td>
-                        <td>TR00 0000 0000 0000 0000 0000 00 (Örnektir)</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
+            <!-- KURUMSAL / HAKKIMIZDA -->
+            <div class="about-highlight-box" id="hakkimizda">
+                <h3>Hakkımızda & Misyonumuz</h3>
+                <p>Hiçbir tarikat, siyaset ve ekonomik bağı olmayan; ulusal ve küresel çapta insanlığa yardım götürmeyi kendisine hedef edinmiş insanlardan oluşmaktadır. Sınırlarımızın ötesinde kalmış olan kardeşlerimizle dini, milli ve kültürel birlikteliğimizin tesisini sağlamak amacıyla yola çıkarak projelerimizi bu doğrultuda hazırlıyoruz.</p>
+            </div>
+
+            <!-- GENİŞLETİLMİŞ KURUMSAL METNİ -->
+            <div class="content-card" id="kurumsal-detay">
+                <h2>Kurumsal</h2>
+                <p>AYYILDIZ Yardım Derneği kurmuş olduğu bağlar ve bir araya getirdiği farklı meslek gruplarıyla Kırıkkalemizin Dünya'ya açılan kapısı konumunda bulunuyor. Başkanlığını Kırıkkale Üniversitesi Tıp Fakültesi Hastane Müdürü Seyit Ahmet ACAR'ın yürüttüğü, başkan yardımcılığını çeşitli sivil toplum kuruluşlarında uluslararası yardım faaliyetleri ve projelerde yönetici olarak bulunan Barış DOĞAN'ın yaptığı AYYILDIZ Yardım Derneği pek çok tanıdık simayı da yönetiminde barındırıyor.</p>
+                <p>DEK Koleji İmtiyaz Sahibi Taki KAPLAN da derneğin Eğitim Komisyonu Başkanlığı görevini yerine getiriyor. Dernek, faaliyetlerinin devamlılığı ve projelerin yürürlüğünün sağlanması adına Kırıkkale Üniversitesi Tıp Fakültesi öğrencilerinden oluşan bir grubu da kadrolarında yönetici olarak barındırıyor.</p>
+                <p>Kırıkkale Üniversitesi Tıp Fakültesi'nden aynı zamanda Kırıkkale il genelindeki pek çok firma ile tasarım çalışmaları bulunan derneğin logo ve websitesinin mimarı Emre ÖZDEŞ de Reklam, Tanıtım ve Halkla İlişkiler Komisyonu Başkanlığı'nı yürütüyor. Saymanlık görevini Rüstem OKÇU, İnsani Yardımlar Komisyonu Başkanlığı'nı Erkan BOZBAĞ üstleniyor. Kırıkkale'de görme engellilerin ışığı olan, tanınan simalardan Bekir AKDENİZ de yine derneğin kadrolarında yer alıyor.</p>
+                <p>Gürcistan'da, Makedonya'da, Kosova'da, Suriye'de ve Arakan Kampları'nda sağlık yardımı, insani yardımlar ve eğitim destek faaliyetlerini gerçekleştiren dernek üyeleri Kırıkkale Üniversitesi'nde görevli akademik eğitim görevlilerinin de içinde bulunduğu zengin yönetim kadrosuyla Kırıkkale'de uluslararası bir organizasyonun öncüsü olmuşlardır. Daha pek çok tanıdık ismi de bünyesinde barındıran AYYILDIZ Yardım Derneği, faaliyetlerini temel olarak 3 kola ayırmış olup bunlar; Sağlık Yardımları, Eğitim Faaliyetleri ve İnsani Yardımlardır.</p>
+                <p>Ekibin; yeni dernekleşmiş olmasına rağmen, üyelerinin çoğunluğu daha önce çeşitli sivil toplum kuruluşlarında benzer faaliyetleri yürütmüş olduğundan yardım faaliyetlerine ve yardım edilen Türk-İslam Coğrafyası'na hâkimiyeti göze çarpıyor.</p>
+                <p>Bir yıllık hedeflerinin içinde 10 ilde temsilcilik açmak bulunan AYYILDIZ Yardım Derneği, Kırıkkale İl Temsilciliği'ne Şehitler Ortaokulu Müdürü Mahmut Keskin'i görevlendirerek ülke içerisinde yapacağı yardım faaliyetleri için ilk adımını Kırıkkale'de atmıştır.</p>
+                <p>Uluslararası ilk çalışmasını Kırım-Ukrayna sınırında yaşayan Tatar Türkleri'ne yönelik yapmak üzere dernek başkanı Seyit Ahmet ACAR ve başkan yardımcısı Barış DOĞAN'ı bölgeye göndererek çalışmalarını başlatmıştır. Belirlemiş olduğu plan dahilinde bölgede sağlık yardımları, insani yardımlar ve eğitim yardımları gerçekleştirecek olan AYYILDIZ Yardım Derneği, Türk Coğrafyası'nın çevresinde adım atılmadık tek bir Türk köyü kalmamasını misyon edindi.</p>
+                <p>Ayrıca Afrika'da ve dünyanın değişik bölgelerinde Müslümanlara yönelik açtırdığı su kuyularıyla ve yine Afrika'da yapılacak olan katarakt ve fıtık ameliyatlarıyla da çalışmalarına uluslararası alanda devam ediyor.</p>
+            </div>
+
+            <!-- YÖNETİM KURULU (GENİŞLETİLMİŞ) -->
+            <div class="content-card" id="yonetim-kurulu">
+                <h2>Yönetim Kurulu</h2>
+                <div class="management-grid">
+                    <div class="member-card"><div class="member-avatar">👤</div><h3>SEYİT AHMET ACAR</h3><p>BAŞKAN</p></div>
+                    <div class="member-card"><div class="member-avatar">👤</div><h3>BARIŞ DOĞAN</h3><p>BAŞKAN YARDIMCISI</p></div>
+                    <div class="member-card"><div class="member-avatar">👤</div><h3>FURKAN BİÇKİN</h3><p>SAĞLIK İŞLERİ KOMİSYONU</p></div>
+                    <div class="member-card"><div class="member-avatar">👤</div><h3>ERCİHAN ÇAKMAK</h3><p>GENEL SEKRETER</p></div>
+                    <div class="member-card"><div class="member-avatar">👤</div><h3>MEHMET FURKAN ENGİN</h3><p>TEMSİLCİLİKLER VE TEŞKİLATLAR KOM.</p></div>
+                    <div class="member-card"><div class="member-avatar">👤</div><h3>TAKİ KAPLAN</h3><p>EĞİTİM KOMİSYONU</p></div>
+                    <div class="member-card"><div class="member-avatar">👤</div><h3>RÜSTEM OKÇU</h3><p>SAYMAN</p></div>
+                    <div class="member-card"><div class="member-avatar">👤</div><h3>ERKAN BOZBAĞ</h3><p>İNSANİ YARDIM KOMİSYONU</p></div>
+                </div>
+            </div>
+
+            <!-- SURİYE DETAY BÖLÜMÜ -->
+            <div class="content-card" id="suriyedetay">
+                <h2>🇸🇾 Suriye Yardım Faaliyetlerimiz</h2>
+                <p>AYYILDIZ Yardım Derneği olarak Suriye'nin Afrin/Maryamin bölgesi başta olmak üzere, savaş mağduru kardeşlerimize yönelik insani yardım çalışmalarımızı aralıksız sürdürüyoruz. Kurban organizasyonları, gıda dağıtımları ve özel ibadet hizmetleriyle bölge halkının yanındayız.</p>
+                <h3>📹 Kurban Organizasyonu Videoları (2020)</h3>
+                <div class="video-grid">
+                    <div class="video-card"><div class="tag">VİDEO</div><div class="video-icon">🎬</div><h4>SURİYE-AFRİN/MARYAMİN<br>KURBAN ORGANİZASYONU-2020</h4><p class="video-meta">📅 2020 | 📍 Afrin / Maryamin</p></div>
+                    <div class="video-card"><div class="tag">VİDEO</div><div class="video-icon">🎬</div><h4>SURİYE-AFRİN/MARYAMİN<br>KURBAN ORGANİZASYONU-2020</h4><p class="video-meta">📅 2020 | 📍 Afrin / Maryamin</p></div>
+                    <div class="video-card"><div class="tag">FOTOĞRAF</div><div class="video-icon">📷</div><h4>SURİYE-AFRİN/MARYAMİN<br>KURBAN ORGANİZASYONU-2020</h4><p class="video-meta">📅 2020 | 📍 Afrin / Maryamin</p></div>
+                    <div class="video-card"><div class="tag">FOTOĞRAF</div><div class="video-icon">📷</div><h4>SURİYE-AFRİN/MARYAMİN<br>KURBAN ORGANİZASYONU-2020</h4><p class="video-meta">📅 2020 | 📍 Afrin / Maryamin</p></div>
+                </div>
+                <h3>🐏 Suriye'de Kurban Hizmetlerimiz</h3>
+                <div class="service-list">
+                    <div class="service-item"><span class="service-icon">🕌</span> Suriye'de Adak Kurbanı – AYYILDIZ Yardım Derneği</div>
+                    <div class="service-item"><span class="service-icon">🕌</span> Suriye'de Adak Kurbanı – AYYILDIZ Yardım Derneği</div>
+                    <div class="service-item"><span class="service-icon">👶</span> Suriye'de Akika Kurbanı – AYYILDIZ Yardım Derneği</div>
+                    <div class="service-item"><span class="service-icon">👶</span> Suriye'de Akika Kurbanı – AYYILDIZ Yardım Derneği</div>
+                </div>
+            </div>
+
+            <!-- MAKEDONYA DETAY BÖLÜMÜ -->
+            <div class="content-card" id="makedonya-detay">
+                <h2>🇲🇰 Makedonya Yardım Faaliyetlerimiz</h2>
+                <p>Balkanlar'daki kardeşlerimize yönelik insani yardım çalışmalarımız kapsamında Makedonya'da kurban organizasyonlarımızı başarıyla gerçekleştiriyoruz. Bölge halkının ihtiyaçlarına cevap vermek üzere düzenli olarak faaliyetlerimizi sürdürüyoruz.</p>
+                <h3>📹 Makedonya Kurban Organizasyonu (2020)</h3>
+                <div class="video-grid">
+                    <div class="video-card"><div class="tag">VİDEO</div><div class="video-icon">🎬</div><h4>MAKEDONYA<br>KURBAN ORGANİZASYONU-2020</h4><p class="video-meta">📅 2020 | 📍 Makedonya</p></div>
+                    <div class="video-card"><div class="tag">VİDEO</div><div class="video-icon">🎬</div><h4>MAKEDONYA<br>KURBAN ORGANİZASYONU-2020</h4><p class="video-meta">📅 2020 | 📍 Makedonya</p></div>
+                    <div class="video-card"><div class="tag">FOTOĞRAF</div><div class="video-icon">📷</div><h4>MAKEDONYA<br>KURBAN ORGANİZASYONU-2020</h4><p class="video-meta">📅 2020 | 📍 Makedonya</p></div>
+                    <div class="video-card"><div class="tag">FOTOĞRAF</div><div class="video-icon">📷</div><h4>MAKEDONYA<br>KURBAN ORGANİZASYONU-2020</h4><p class="video-meta">📅 2020 | 📍 Makedonya</p></div>
+                </div>
+            </div>
+
+            <!-- ARAKAN DETAY BÖLÜMÜ -->
+            <div class="content-card" id="arakan-detay">
+                <h2>🇧🇩 Arakan & Bangladeş Yardım Faaliyetlerimiz</h2>
+                <p>Arakan kamplarında zor şartlar altında yaşayan Müslüman kardeşlerimize yönelik yardım çalışmalarımızı büyük bir özveriyle yürütüyoruz. Kurban organizasyonları, su kuyuları ve Ramazan yardımları başlıca faaliyetlerimiz arasındadır.</p>
+
+                <h3>📹 Nafile Kurban Organizasyonu (2020)</h3>
+                <div class="video-grid">
+                    <div class="video-card"><div class="tag">VİDEO</div><div class="video-icon">🎬</div><h4>ARAKAN NAFİLE KURBAN<br>ORGANİZASYONU-2020</h4><p class="video-meta">📅 2020 | 📍 Arakan</p></div>
+                    <div class="video-card"><div class="tag">VİDEO</div><div class="video-icon">🎬</div><h4>ARAKAN NAFİLE KURBAN<br>ORGANİZASYONU-2020</h4><p class="video-meta">📅 2020 | 📍 Arakan</p></div>
+                    <div class="video-card"><div class="tag">FOTOĞRAF</div><div class="video-icon">📷</div><h4>ARAKAN NAFİLE KURBAN<br>ORGANİZASYONU-2020</h4><p class="video-meta">📅 2020 | 📍 Arakan</p></div>
+                    <div class="video-card"><div class="tag">FOTOĞRAF</div><div class="video-icon">📷</div><h4>ARAKAN NAFİLE KURBAN<br>ORGANİZASYONU-2020</h4><p class="video-meta">📅 2020 | 📍 Arakan</p></div>
+                </div>
+
+                <h3>📹 Kurban Organizasyonu (2020)</h3>
+                <div class="video-grid">
+                    <div class="video-card"><div class="tag">VİDEO</div><div class="video-icon">🎬</div><h4>ARAKAN KURBAN<br>ORGANİZASYONU-2020</h4><p class="video-meta">📅 2020 | 📍 Arakan</p></div>
+                    <div class="video-card"><div class="tag">VİDEO</div><div class="video-icon">🎬</div><h4>ARAKAN KURBAN<br>ORGANİZASYONU-2020</h4><p class="video-meta">📅 2020 | 📍 Arakan</p></div>
+                    <div class="video-card"><div class="tag">FOTOĞRAF</div><div class="video-icon">📷</div><h4>ARAKAN KURBAN<br>ORGANİZASYONU-2020</h4><p class="video-meta">📅 2020 | 📍 Arakan</p></div>
+                    <div class="video-card"><div class="tag">FOTOĞRAF</div><div class="video-icon">📷</div><h4>ARAKAN KURBAN<br>ORGANİZASYONU-2020</h4><p class="video-meta">📅 2020 | 📍 Arakan</p></div>
+                </div>
+
+                <h3>📹 Arakan Kurban Yardımı (2019)</h3>
+                <div class="video-grid">
+                    <div class="video-card"><div class="tag">VİDEO</div><div class="video-icon">🎬</div><h4>ARAKAN KURBAN<br>YARDIMLARI-2019</h4><p class="video-meta">📅 2019 | 📍 Arakan</p></div>
+                    <div class="video-card"><div class="tag">VİDEO</div><div class="video-icon">🎬</div><h4>ARAKAN KURBAN<br>YARDIMLARI-2019</h4><p class="video-meta">📅 2019 | 📍 Arakan</p></div>
+                    <div class="video-card"><div class="tag">FOTOĞRAF</div><div class="video-icon">📷</div><h4>ARAKAN KURBAN<br>YARDIMI-2019</h4><p class="video-meta">📅 2019 | 📍 Arakan</p></div>
+                    <div class="video-card"><div class="tag">FOTOĞRAF</div><div class="video-icon">📷</div><h4>ARAKAN KURBAN<br>YARDIMI-2019</h4><p class="video-meta">📅 2019 | 📍 Arakan</p></div>
+                </div>
+
+                <h3>💧 Bangladeş & Arakan Su Kuyuları</h3>
+                <div class="video-grid">
+                    <div class="video-card"><div class="tag">VİDEO</div><div class="video-icon">🎬</div><h4>Bangladeş Su Kuyuları<br>AYYILDIZ Yardım Derneği</h4><p class="video-meta">📍 Bangladeş</p></div>
+                    <div class="video-card"><div class="tag">VİDEO</div><div class="video-icon">🎬</div><h4>Bangladeş Su Kuyuları<br>AYYILDIZ Yardım Derneği</h4><p class="video-meta">📍 Bangladeş</p></div>
+                    <div class="video-card"><div class="tag">GÖRSEL</div><div class="video-icon">🖼️</div><h4>Bangladeş & Arakan<br>Su Kuyuları Görseller</h4><p class="video-meta">📍 Bangladeş & Arakan</p></div>
+                    <div class="video-card"><div class="tag">LİSTE</div><div class="video-icon">📋</div><h4>Bangladeş & Arakan<br>Su Kuyuları Hayırseverler</h4><p class="video-meta">📍 Bangladeş & Arakan</p></div>
+                </div>
+
+                <h3>🌙 Ramazan Ayı Yardımları (2020)</h3>
+                <div class="video-grid">
+                    <div class="video-card"><div class="tag">VİDEO</div><div class="video-icon">🎬</div><h4>Arakan Ramazan Ayı Yardımları 2020<br>AYYILDIZ Yardım Derneği</h4><p class="video-meta">📅 2020 | 📍 Arakan</p></div>
+                    <div class="video-card"><div class="tag">VİDEO</div><div class="video-icon">🎬</div><h4>Arakan Ramazan Ayı Yardımları 2020<br>AYYILDIZ Yardım Derneği</h4><p class="video-meta">📅 2020 | 📍 Arakan</p></div>
+                    <div class="video-card"><div class="tag">FOTOĞRAF</div><div class="video-icon">📷</div><h4>Arakan Ramazan Ayı Yardımları 2020</h4><p class="video-meta">📅 2020 | 📍 Arakan</p></div>
+                    <div class="video-card"><div class="tag">FOTOĞRAF</div><div class="video-icon">📷</div><h4>Arakan Ramazan Ayı Yardımları 2020</h4><p class="video-meta">📅 2020 | 📍 Arakan</p></div>
+                </div>
+            </div>
+
+            <!-- SÜNNET YARDIMLARI -->
+            <div class="content-card" id="sunnet-yardimlari">
+                <h2>Sağlık Yardımları: Sünnet Projeleri</h2>
+                <p>AYYILDIZ Yardım Derneği olarak sağlıklı bir erkek neslin yetişmesi için en temel gereksinimlerden biri olan sünnet ihtiyacını, tıbbi ve maddi imkansızlıklar yaşayan coğrafyalarda düzenli organizasyonlarla gerçekleştiriyoruz.</p>
+                <div class="campaign-banner">
+                    <div class="campaign-icon">✨</div>
+                    <div class="campaign-text">
+                        <h3>"ÇOCUĞUMA KİRVE OL"</h3>
+                        <p>Sloganıyla yola çıktığımız bu anlamlı yardım hareketinde, Balkanlar, Ortadoğu ve Afrika'daki ihtiyaç sahibi çocuklarımızın sünnet operasyonları, derneğimize bağlı gönüllü doktorlarımız tarafından tamamen steril ve modern tıbbi ortamlarda ücretsiz olarak gerçekleştirilmektedir.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GIDA YARDIMLARI -->
+            <div class="content-card" id="gida-yardimlari">
+                <h2>İnsani Yardım: Gıda Kolisi Dağıtımları</h2>
+                <p>AYYILDIZ Yardım Derneği olarak her yıl düzenli şekilde dağıttığımız yüzlerce gıda kolisinin yanı sıra temel yaşam maddelerini de içeren iaşe desteklerimizi aralıksız sürdürüyoruz.</p>
+                <div class="food-tags">
+                    <span class="food-tag">🌻 Sıvı Yağ</span>
+                    <span class="food-tag">🌾 Un Yardımları</span>
+                    <span class="food-tag">🫘 Bakliyat</span>
+                    <span class="food-tag">🧂 Tuz & Şeker</span>
+                </div>
+                <p>Zengin besin içeriğine sahip bu yardım paketlerini Türkiye başta olmak üzere 3 kıtada zor şartlar altında yaşam mücadelesi veren mazlum kardeşlerimize bizzat ulaştırıyoruz.</p>
+                <div class="alert-stat-box">
+                    <div class="stat-highlight">Her 15 Saniyede 1</div>
+                    <div class="stat-desc">Dünya üzerinde her 15 saniyede bir çocuk, sadece ve sadece temel besin maddelerine ulaşamadığı, beslenemediği için hayatını kaybediyor.</div>
+                </div>
+                <p>AYYILDIZ Yardım Derneği olarak gündemimize hassasiyetle taşıdığımız en kritik kampanyalar arasında yer alan <strong>"Un Yardımlarını"</strong>, kriz coğrafyalarına ulaştırarak ekmek oluyor, hayat oluyoruz.</p>
+            </div>
+
+            <!-- EĞİTİM YARDIMLARI -->
+            <div class="content-card" id="egitim-yardimlari">
+                <h2>Kültürel & İlmi Destek: Eğitim Yardımları</h2>
+                <p>Eğitim yardımı projeleri ile İslam dünyasının en ücra köşelerinde geleceğe dair umut besleyen, özellikle de <strong>Türk Milletinden</strong> bir destek eli bekleyen mazlum çocukların eğitim hayatlarına omuz vermek derneğimizin en asli vazifelerinden biridir.</p>
+                <div class="education-focus-box">
+                    <h4>📚 Stratejik Hedefimiz</h4>
+                    <p style="margin-bottom: 0; font-size: 14.5px; color: #5c4033; font-style: italic;">"Coğrafi ve maddi imkansızlıklar nedeniyle mahrumiyet çeken bölgeleri eğitim yardımları ile güçlendirerek, yarının dünyasında söz sahibi olacak nitelikli lider kişiler yetiştirmeyi amaçlıyoruz."</p>
+                </div>
+                <p>Evlatlarımızın yabancı ideolojilerin pençesine düşmeden, kendi öz medeniyet tasavvurlarına, <strong>Türk-İslam kültür ve değerlerine</strong> uygun bir vizyonla yetişmelerini sağlıyoruz.</p>
+            </div>
+
+            <!-- MALİ İBADETLER -->
+            <div class="content-card" id="mali-ibadetler">
+                <h2>Mali İbadetler: Sadaka, Zekat ve Fitre Yardımları</h2>
+                <p>Mensubu olmaktan büyük bir şeref duyduğumuz, Allah nezdinde tek hak din olan İslam; Zekât, Sadaka, Fitre gibi maddi yardımları, ihtiyaç sahiplerine vermemizi emretmektedir. Bu emir sosyal devlet anlayışının da zeminini oluşturmaktadır. Yardımlaşma, kardeşlik duygularımızın kuvvetlenmesi, zenginle fakir arasındaki kaynaşmanın sağlanması gibi çok önemli güzellikleri içinde barındırmaktadır.</p>
+                <div class="islamic-worship-box">
+                    <h4>🕌 Toplumsal Dayanışmanın Temeli</h4>
+                    <p style="margin-bottom: 0; font-size: 14.5px; color: #2c3e50; text-align: justify;">Bu ilahi emir, "sosyal devlet anlayışının" da zeminini oluşturmaktadır. Yardımlaşma köprüleri; din kardeşliği duygularımızın kuvvetlenmesini, zengin ile yoksul arasındaki sevgi ve kaynaşmanın sağlanması gibi çok önemli kalbi güzellikleri içinde barındırır.</p>
+                    <div class="worship-tags">
+                        <span class="worship-tag">• ZEKAT</span>
+                        <span class="worship-tag">• SADAKA</span>
+                        <span class="worship-tag">• FİTRE</span>
+                    </div>
+                </div>
+                <p>AYYILDIZ Yardım Derneği olarak, zekatlarınızı, sadakalarınızı ve fitrelerinizi <strong>yıl boyunca kesintisiz olarak</strong> yurt içindeki ve yurt dışındaki ihtiyaç sahiplerine özenle ve hassasiyetle ulaştırmaktayız.</p>
+            </div>
+
+            <!-- SU KUYULARI -->
+            <div class="content-card" id="su-kuyulari">
+                <h2>Su Kuyuları Projesi</h2>
+                <p>Afrika ve Asya ve Balkanlar'da kardeşlerimiz maddi imkansızlıklardan dolayı su sıkıntısı yaşamaktadır. AYYILDIZ Yardım Derneği olarak onların hizmetine sunulması noktasında <strong>"Bir damla, bir hayat"</strong> projesi gerçekleştiriyoruz. Bu proje kapsamında günlük su ihtiyaçlarının karşılanması ve tarım alanında kuraklıktan dolayı yaşanan verimsizliğin önüne de geçilmesini hedefliyoruz.</p>
+                <div class="campaign-banner">
+                    <div class="campaign-icon">💧</div>
+                    <div class="campaign-text">
+                        <h3>"BİR DAMLA, BİR HAYAT"</h3>
+                        <p>Afrika, Asya ve Balkanlar'da açtırdığımız su kuyuları ile binlerce kardeşimize temiz içme suyu ulaştırıyor, hayat veriyoruz.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KURBAN YARDIMI -->
+            <div class="content-card" id="kurban-yardimi">
+                <h2>Kurban Yardımı</h2>
+                <p>AYYILDIZ Yardım Derneği olarak adak, akika ve şükür kurbanlarını, yıl boyunca dünyanın birçok yoksul ülkesinde kesip ihtiyaç sahiplerine dağıtıyoruz. Onlarca kişiden oluşan gönüllü ekiplerimizle kurban bağışlarınızı titizlikle seçip kesimini ve dağıtımını yapmakla kalmıyor, yardıma muhtaç gönüllere ulaştırıyoruz. Siz de adak, akika ve şükür kurbanlarınızı aracılığımızla ihtiyaç sahiplerine ulaştırabilirsiniz.</p>
+                <div class="service-list">
+                    <div class="service-item"><span class="service-icon">🐏</span> Adak Kurbanı</div>
+                    <div class="service-item"><span class="service-icon">👶</span> Akika Kurbanı</div>
+                    <div class="service-item"><span class="service-icon">🤲</span> Şükür Kurbanı</div>
+                </div>
+            </div>
+
+            <!-- GİYECEK YARDIMLARI -->
+            <div class="content-card" id="giyecek-yardimlari">
+                <h2>Giyim Yardımları</h2>
+                <p>Savaş, yoksulluk ve doğal afetlerden dolayı kış aylarında zorluk yaşayan ihtiyaç sahibi çocuklara ve ailelere yönelik kışlık giyim yardımlarımız devam etmektedir. Yürüttüğümüz giysi yardımları ile üşüyen çocukların rahat bir uyku tatmalarını, bir nebze de olsa sıcak giysileriyle kışın kavurucu soğuğundan korunmaları için çalışıyoruz.</p>
+            </div>
+
+            <!-- BAĞIŞ REHBERİ -->
+            <div class="content-card" id="bagis-rehberi">
+                <h2>Bağış Hakkında Bilgilendirme</h2>
+                <div class="donation-block">
+                    <h3>💵 Bağışların Derneğimize Ulaştırılması</h3>
+                    <ul class="donation-list">
+                        <li><strong>Elden Nakdi Bağış:</strong> AYYILDIZ Yardım Derneğine gelerek elden, makbuz karşılığında nakdi bağışta bulunabilirsiniz.</li>
+                        <li><strong>Online Bağış:</strong> Online bağış sistemimiz üzerinden bağışlar gerçekleştirilebilir.</li>
+                        <li><strong>Banka Havalesi / EFT:</strong> Bağışınızı derneğimize ait banka hesap numaralarına havale/EFT ile gönderebilirsiniz.</li>
+                    </ul>
+                </div>
+                <div class="donation-block">
+                    <h3>📦 Ayni Bağış İçeriği</h3>
+                    <p>Özellikle kullanılmamış giyim yardımları olmak üzere, beyaz eşya ve diğer ev eşyaları, battaniye, çocuk bezi ve paketlenmiş gıda yardımlarını bağış olarak almaktayız.</p>
+                    <p><strong>Ayni bağışların tarafımıza ulaştırılması:</strong> Bağışçının gerçekleştireceği bağışı özenle paketlemesi en büyük arzumuzdur. Yardım paketinin tarafımıza ulaşımının mümkünse bağışçı tarafından gerçekleştirilmesi bizim için kolaylık oluşturacaktır. Ulaştırma imkanı olmayan bağışçılarımız il şubelerimize ait telefon veya diğer iletişim kanalı ile irtibat kurabilir.</p>
+                </div>
+                <div class="donation-block">
+                    <h3>📱 Banka ve Online Bağış Takibi</h3>
+                    <p>Bağışçımızın bağışı gerçekleştirdiği esnada bildirdiği cep telefonu numarasına bağış durumu ile ilgili bilgiler iletilmektedir. Daha detaylı bilgi için <strong>0 000 00 00</strong> numaralı telefondan irtibat kurulabilir.</p>
+                </div>
+                <div class="donation-block">
+                    <h3>🏠 Gayrimenkul Bağışları</h3>
+                    <p>Gayrimenkul bağışlar derneğimizin kabul ettiği bağışlar arasında yer almaktadır. Gayrimenkul bağışlar bağışçıların isteği üzerine hazırlanan projelere göre eksik alanlarda (okul, yurt, yetimhane, aşevi, mescit, camii vb.) kullanılabilmektedir.</p>
+                </div>
+            </div>
+
+            <!-- AYNİ BAĞIŞ -->
+            <div class="content-card" id="ayni-bagis">
+                <h2>Ayni Bağış</h2>
+                <p><strong>Ayni bağış içeriği:</strong> Özellikle kullanılmamış giyim yardımları olmak üzere, beyaz eşya ve diğer ev eşyaları, battaniye, çocuk bezi ve paketlenmiş gıda yardımlarını bağış olarak almaktayız.</p>
+                <p><strong>Ayni bağışların tarafımıza ulaştırılması:</strong> Bağışçının gerçekleştireceği bağışı özenle paketlemesi en büyük arzumuzdur. Yardım paketinin tarafımıza ulaşımının mümkünse bağışçı tarafından gerçekleştirilmesi bizim için kolaylık oluşturacaktır. Ulaştırma imkanı olmayan bağışçılarımız il şubelerimize ait telefon veya diğer iletişim kanalı ile irtibat kurabilir.</p>
+                <p><strong>Gayrimenkul bağışlar:</strong> Gayrimenkul bağışlar derneğimizin kabul ettiği bağışlar arasında yer almaktadır. Gayrimenkul bağışlar bağışçıların isteği üzerine hazırlanan projelere göre eksik alanlarda (okul, yurt, yetimhane, aşevi, mescit, camii vb.) kullanılabilmektedir.</p>
+            </div>
+
+            <!-- BANKA HESAPLARI -->
+            <div class="content-card" id="banka-hesaplari">
+                <h2>Banka Hesapları</h2>
+                <div class="bank-info-box">
+                    <p class="bank-name">T.C. Ziraat Bankası A.Ş.<br>AYYILDIZ YARDIM DERNEĞİ</p>
+                    <p style="margin-top: 5px; font-size: 13px; color: #666;">Ziraat Banka IBAN No:</p>
+                    <p class="iban">TR77 0001 0017 1791 0754 3350 01</p>
+                </div>
+            </div>
+
+            <!-- SMS BAĞIŞ -->
+            <div class="content-card" id="sms-bagis">
+                <h2>SMS Bağış</h2>
+                <p>SMS ile bağış sistemimiz aktif edilmemiştir. En kısa zamanda hizmete sunulacaktır.</p>
+            </div>
+
+        </main>
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="widget">
+                <h3>PROJE & FAALİYET MENÜSÜ</h3>
+                <ul class="widget-menu">
+                    <li><a href="#hakkimizda">» HAKKIMIZDA</a></li>
+                    <li><a href="#yonetim-kurulu">» YÖNETİM KURULU</a></li>
+                    <li><a href="#suriyedetay">» SURİYE FAALİYETLERİ</a></li>
+                    <li><a href="#makedonya-detay">» MAKEDONYA FAALİYETLERİ</a></li>
+                    <li><a href="#arakan-detay">» ARAKAN FAALİYETLERİ</a></li>
+                    <li><a href="#sunnet-yardimlari">» SÜNNET YARDIMLARI</a></li>
+                    <li><a href="#gida-yardimlari">» GIDA & UN YARDIMLARI</a></li>
+                    <li><a href="#egitim-yardimlari">» EĞİTİM YARDIMLARI</a></li>
+                    <li><a href="#mali-ibadetler">» ZEKAT, SADAKA & FİTRE</a></li>
+                    <li><a href="#su-kuyulari">» SU KUYULARI</a></li>
+                    <li><a href="#kurban-yardimi">» KURBAN YARDIMI</a></li>
+                    <li><a href="#giyecek-yardimlari">» GİYECEK YARDIMLARI</a></li>
+                    <li><a href="#bagis-rehberi">» BAĞIŞ REHBERİ</a></li>
+                    <li><a href="#banka-hesaplari">» BANKA HESAPLARI</a></li>
+                </ul>
+            </div>
+            <div class="catalog-widget">
+                <p>Dönemsel faaliyet raporlarımız ve projelerimizin detaylı dokümantasyonu kataloğumuzda yer almaktadır.</p>
+                <a href="#" class="btn-white">ONLINE KATALOG</a>
+            </div>
+        </aside>
+    </div>
 
     <footer>
-        <div class="footer-logo">AYYILDIZ YARDIM DERNEĞİ</div>
-        <p>© 2026 Tüm Hakları Saklıdır.</p>
-        <p>📍 Basında Biz | Duyurular | Tüzüğümüz</p>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>AYYILDIZ DERNEĞİ</h4>
+                <p>Hiçbir siyasi, ekonomik ya da tarikat bağı bulunmayan, Kırıkkale merkezli küresel bir insani yardım organizasyonudur.</p>
+            </div>
+            <div class="footer-col">
+                <h4>İLETİŞİM BİLGİLERİ</h4>
+                <p><strong>📍 Bölge:</strong> Kırıkkale</p>
+                <p><strong>📞 Telefon:</strong> 0533 665 43 31</p>
+                <p><strong>✉️ E-Posta:</strong> bilgi@ayyildizyardimdernegi.org.tr</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2019 Ayyıldız Yardım Derneği. Tüm Hakları Saklıdır. | Altyapı Mimari: Emre ÖZDEŞ</p>
+        </div>
     </footer>
 
 </body>
